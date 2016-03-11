@@ -4,8 +4,19 @@ import java.awt.*;
 public class BadmintonGame extends JPanel {
 
 
+    private final Ball ball;
+
     public BadmintonGame() {
+        ball = new Ball(this);
         setBackground(Color.white);
+    }
+    @Override
+    public void paint(Graphics g){
+        super.paint(g);
+        Graphics2D g2D= (Graphics2D) g;
+        g2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING,RenderingHints.VALUE_ANTIALIAS_ON);
+        ball.paint(g2D);
+
     }
 
     public static void main(String[] args) throws InterruptedException {
