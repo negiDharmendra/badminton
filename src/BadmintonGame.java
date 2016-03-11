@@ -9,7 +9,7 @@ public class BadmintonGame extends JPanel {
     }
 
     public static void main(String[] args) throws InterruptedException {
-        JFrame frame = new JFrame("Mini Tennis");
+        JFrame frame = new JFrame("Badminton");
         BadmintonGame badmintonGame = new BadmintonGame();
         frame.add(badmintonGame);
         frame.setSize(700, 600);
