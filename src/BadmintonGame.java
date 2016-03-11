@@ -10,6 +10,11 @@ public class BadmintonGame extends JPanel {
         ball = new Ball(this);
         setBackground(Color.white);
     }
+
+   private  void move (){
+        ball.move();
+    }
+
     @Override
     public void paint(Graphics g){
         super.paint(g);
@@ -29,6 +34,11 @@ public class BadmintonGame extends JPanel {
         frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 
+        while (true){
+            badmintonGame.move();
+            badmintonGame.repaint();
+            Thread.sleep(10);
+        }
 
     }
 
