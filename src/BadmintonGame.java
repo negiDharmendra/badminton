@@ -8,6 +8,7 @@ public class BadmintonGame extends JPanel {
 
     private final Ball ball;
     private final Racket racket;
+    private static BadmintonGame badmintonGame;
 
     public BadmintonGame() {
         ball = new Ball(this);
@@ -33,8 +34,8 @@ public class BadmintonGame extends JPanel {
         setFocusable(true);
     }
 
-    private void move() {
-        ball.move();
+    private void move() throws InterruptedException {
+        ball.move(racket.getBounds());
         racket.move(this.getWidth());
     }
 
@@ -50,7 +51,7 @@ public class BadmintonGame extends JPanel {
 
     public static void main(String[] args) throws InterruptedException {
         JFrame frame = new JFrame("Badminton");
-        BadmintonGame badmintonGame = new BadmintonGame();
+        badmintonGame = new BadmintonGame();
         frame.add(badmintonGame);
         frame.setSize(700, 600);
         frame.setResizable(false);
@@ -58,12 +59,30 @@ public class BadmintonGame extends JPanel {
         frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 
-        while (true) {
-            badmintonGame.move();
-            badmintonGame.repaint();
-            Thread.sleep(10);
-        }
+
+        String message = "Do you want to play";
+        int playerResponse = JOptionPane.showConfirmDialog(null, message, "Start", JOptionPane.YES_NO_OPTION);
+
+        if (playerResponse == 0)
+            play();
+        else
+            System.exit(0);
 
     }
 
+    private static void play() throws InterruptedException {
+        while (true) {
+            badmintonGame.move();
+            badmintonGame.repaint();
+            Thread.sleep(5);
+        }
+    }
+
+    public void gameOver() throws InterruptedException {
+        String message = "Game over";
+        int playerResponse = JOptionPane.showConfirmDialog(null, message, "Game Over", JOptionPane.CLOSED_OPTION);
+
+        if (playerResponse == 0)
+            System.exit(1);
+    }
 }

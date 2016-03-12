@@ -13,7 +13,7 @@ public class Ball {
 
 
 
-    void move() {
+    void move(Rectangle racketBound) throws InterruptedException {
         if (x + pixelX < 0)
             pixelX = 1;
         if (x + pixelX > game.getWidth() - diameter)
@@ -21,10 +21,16 @@ public class Ball {
         if (y + pixelY < 0)
             pixelY = 1;
         if (y + pixelY > game.getHeight()- diameter)
+            game.gameOver();
+        if(collision(racketBound))
             pixelY = -1;
         x = x + pixelX;
         y = y + pixelY;
 
+    }
+
+    private boolean collision(Rectangle racketBounds) {
+        return racketBounds.intersects(getBounds());
     }
 
 
@@ -32,4 +38,7 @@ public class Ball {
         g.fillOval(x, y, diameter, diameter);
     }
 
+    public Rectangle getBounds() {
+        return new Rectangle(x,y,diameter,diameter);
+    }
 }

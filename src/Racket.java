@@ -8,6 +8,7 @@ public class Racket {
     private int x = 0;
     private int pixelX = 0;
     private int y;
+    private Rectangle bounds;
 
     void move(int courtWidth) {
         if (x + pixelX > 0 && x + pixelX < courtWidth - width)
@@ -30,5 +31,9 @@ public class Racket {
 
     public void keyReleased() {
         pixelX = 0;
+    }
+
+    public Rectangle getBounds() {
+        return new Rectangle(x,y,width,height);
     }
 }
